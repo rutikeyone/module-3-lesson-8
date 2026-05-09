@@ -21,6 +21,7 @@ struct ContentView: View {
             .background(.primaryTitle)
             .zIndex(1)
             .opacity(opacity)
+            .animation(.easeInOut(duration: 0.1), value: opacity)
             
             ScrollView {
                 VStack {
@@ -37,7 +38,7 @@ struct ContentView: View {
                             .frame(height: 300 + height)
                             .offset(y: offsetY)
                             .onChange(of: minY) { _, newValue in
-                                opacity = -minY / 300
+                                opacity = min(max(-minY / 300, 0), 1)
                             }
                     }
                     .frame(height: 300)
